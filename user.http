@@ -1,0 +1,19 @@
+###
+GET http://localhost:3000/healthCheck
+
+
+###
+GET http://localhost:3000/users
+
+
+###
+POST http://localhost:3000/users/signup
+Content-Type: application/json
+
+{
+    "fullName" : "test test",
+    "email" : "test@test.com",
+    "password": "testPassword"
+}
+
+###
