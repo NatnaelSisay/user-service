@@ -1,5 +1,5 @@
-1. FINISH THE LOGIC FOR SIGNUP, AND LOGIN
-2. ADD JWT TOKEN AUTHENTICATION
-3. ADD 3 ROLES, TO THE USER, ADMIN, USER, DRIVER
+1. FINISH THE LOGIC FOR SIGNUP, AND LOGIN ( 90% - validation of input)
+2. [DONE] ADD JWT TOKEN AUTHENTICATION (100%)
+3. [DONE] ADD 3 ROLES, TO THE USER, ADMIN, USER, DRIVER
 4. Kubernetes service, and deployment
 5. Helm for the project, and make the deployment work with mongodb
