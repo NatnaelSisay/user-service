@@ -28,7 +28,7 @@ app.get("/healthCheck", (req, res) => {
 	});
 });
 
-app.use("/users", usersRouter);
+app.use("/api/users", usersRouter);
 
 app.get("*", (req, res) => {
 	res.status(404);
