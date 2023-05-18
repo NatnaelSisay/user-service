@@ -20,4 +20,4 @@ ENV DB_HOST $DB_HOST
 ENV DB_PORT $DB_PORT
 ENV DB_NAME $DB_NAME
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "dev"]
