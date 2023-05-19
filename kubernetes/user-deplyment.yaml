@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-deployment
+spec:
+  selector:
+    matchLabels:
+      app: user-deployment
+  template:
+    metadata:
+      labels:
+        app: user-deployment
+    spec:
+      containers:
+      - name: user
+        image: docker.io/javaethio/userimage:0.0.4
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
+        env:
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: user-secret
+                key: JWT_SECRET
+          - name: DB_USER_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: user-db
+                key: DB_USER_NAME
+          - name: DB_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: user-db
+                key: DB_PASSWORD
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: user-db
+                key: DB_HOST
+          - name: DB_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: user-db
+                key: DB_PORT
+          - name: DB_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: user-db
+                key: DB_NAME
+

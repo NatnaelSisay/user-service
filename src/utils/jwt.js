@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const jwt = require("jsonwebtoken");
+const getSecretKey = require("./genSecret");
 
 const secret = process.env.JWT_SECRET || "default_secret_value";
 
