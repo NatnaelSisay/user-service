@@ -1,6 +1,6 @@
 IMAGE_NAME="userimage"
 USER_NAME="javaethio"
-VERSION="0.0.4"
+VERSION="0.0.5"
 
 cd ..
 docker build -t $IMAGE_NAME:$VERSION .

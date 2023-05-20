@@ -15,9 +15,9 @@ async function main() {
 	return mongoose.connect(connectionString);
 }
 
-// main()
-// 	.then(() => console.log("connected successfully"))
-// 	.catch((error) => console.log("Error connecting to DB: ", error));
+main()
+	.then(() => console.log("connected successfully"))
+	.catch((error) => console.log("Error connecting to DB: ", error));
 
 app.use(express.json());
 

@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: user
-        image: docker.io/javaethio/userimage:0.0.4
+        image: docker.io/javaethio/userimage:0.0.5
         resources:
           limits:
             memory: "128Mi"
