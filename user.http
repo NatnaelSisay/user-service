@@ -2,6 +2,9 @@
 GET http://localhost:3000/api/users/healthCheck
 
 ###
+GET http://localhost:3000/api/users/testing/all
+
+###
 POST http://localhost:3000/api/users/signup
 Content-Type: application/json
 
@@ -21,4 +24,15 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/api/users/646b5af921473d8a26e723bc
+GET http://localhost:3000/api/users/646b6f44689d8e86a2554a1d
+
+###
+PUT  http://localhost:3000/api/users/646b6f44689d8e86a2554a1d
+Content-Type: application/json
+
+{
+    "fullName" : "test tester"
+}
+
+###
+DELETE  http://localhost:3000/api/users/646b6f44689d8e86a2554a1d
