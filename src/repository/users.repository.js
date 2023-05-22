@@ -14,7 +14,7 @@ const createUser = async (userData) => {
 
 const findUserByEmail = async (email) => {
 	const result = await userModel.findOne({ email: email });
-	return result;
+	return result || null;
 };
 
 const userAlreadyExist = async (email) => {
@@ -45,10 +45,10 @@ const updateUser = async (userId, data) => {
 	return result || null;
 };
 
-const getAllUsers = async() => {
+const getAllUsers = async () => {
 	const result = await userModel.find({});
-	return result || null
-}
+	return result || null;
+};
 
 module.exports = {
 	createUser,
@@ -57,5 +57,5 @@ module.exports = {
 	findUserById,
 	deleteUser,
 	updateUser,
-	getAllUsers
+	getAllUsers,
 };
