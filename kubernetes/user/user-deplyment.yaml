@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: user
-        image: docker.io/javaethio/userimage:0.0.7
+        image: docker.io/javaethio/userimage:0.0.8
         resources:
           limits:
             memory: "128Mi"
@@ -26,29 +26,16 @@ spec:
               secretKeyRef:
                 name: user-secret
                 key: JWT_SECRET
-          - name: DB_USER_NAME
-            valueFrom:
-              configMapKeyRef:
-                name: user-db
-                key: DB_USER_NAME
-          - name: DB_PASSWORD
-            valueFrom:
-              configMapKeyRef:
-                name: user-db
-                key: DB_PASSWORD
           - name: DB_HOST
             valueFrom:
               configMapKeyRef:
                 name: user-db
                 key: DB_HOST
-          - name: DB_PORT
+          - name: MONGODB_ROOT_PASSWORD
             valueFrom:
-              configMapKeyRef:
-                name: user-db
-                key: DB_PORT
-          - name: DB_NAME
-            valueFrom:
-              configMapKeyRef:
-                name: user-db
-                key: DB_NAME
+              secretKeyRef:
+                name: mongodb
+                key: mongodb-root-password
+          - name: MONGODB_URI
+            value: "mongodb://root:$(MONGODB_ROOT_PASSWORD)@mongodb.default.svc.cluster.local:27017/user_test_db?authSource=admin"
 

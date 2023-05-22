@@ -10,7 +10,10 @@ const getMongoDBConnectionString = () => {
 		process.env.DB_NAME || "user_test_db"
 	}`;
 
-	return connectionString;
+	const serivceMongodbConnection = process.env.MONGODB_URI;
+	console.log("🚀 ~ file: utilities.js:14 ~ getMongoDBConnectionString ~ serivceMongodbConnection:", serivceMongodbConnection)
+	
+	return serivceMongodbConnection || connectionString;
 };
 
 module.exports = {
