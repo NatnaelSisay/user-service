@@ -19,3 +19,6 @@ Content-Type: application/json
     "email" : "test@test.com",
     "password": "testPassword"
 }
+
+###
+GET http://localhost:3000/api/users/646b5af921473d8a26e723bc

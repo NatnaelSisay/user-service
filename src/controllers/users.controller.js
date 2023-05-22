@@ -4,7 +4,36 @@ const {
 	createUser,
 	findUserByEmail,
 	userAlreadyExist,
+	findUserById
 } = require("../repository/users.repository");
+
+const getUserController = async (req, res, next) => {
+	try {
+		const user_id = req.params.user_id || null;
+		if (!user_id) {
+			return res.json({
+				success: false,
+				message: `Invalid User Id: ${req.params.user_id}`,
+			});
+		}
+
+		const user = await findUserById(user_id) || null;
+		if(!user){
+			return res.json({
+				success: false,
+				message: `Invalid User Id: ${user_id}`,
+			});
+		}
+
+		res.statusCode = 200;
+		res.json({
+			success: true,
+			data: user
+		})
+	} catch (error) {
+		next(error);
+	}
+};
 
 const signupController = async (req, res, next) => {
 	try {
@@ -36,7 +65,7 @@ const signupController = async (req, res, next) => {
 const loginController = async (req, res, next) => {
 	const userData = req.body;
 
-	if (!userAlreadyExist(userData.email)) {
+	if (!(await userAlreadyExist(userData.email))) {
 		res.json({
 			success: false,
 			message: `Invalid email or password`,
@@ -64,6 +93,7 @@ const loginController = async (req, res, next) => {
 };
 
 module.exports = {
+	getUserController,
 	signupController,
 	loginController,
 };

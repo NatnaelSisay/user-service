@@ -1,6 +1,7 @@
 const express = require("express");
 
 const {
+	getUserController,
 	signupController,
 	loginController,
 } = require("../controllers/users.controller");
@@ -16,10 +17,10 @@ usersRouter.get("/healthCheck", (req, res) => {
 	});
 });
 
-// Signup
-usersRouter.post("/signup", express.json(), signupController);
 
-// Login
+usersRouter.get("/:user_id", getUserController);
+usersRouter.post("/signup", express.json(), signupController);
 usersRouter.post("/login", express.json(), loginController);
+
 
 module.exports = usersRouter;
