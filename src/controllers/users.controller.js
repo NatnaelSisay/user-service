@@ -56,11 +56,10 @@ const signupController = async (req, res, next) => {
 
 		const userExists = await userAlreadyExist(userData.email);
 		if (userExists) {
-			res.json({
+			return res.json({
 				success: false,
 				message: "user already exist",
 			});
-			return;
 		}
 
 		userData.password = await hashPassword(userData.password);
