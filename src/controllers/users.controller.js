@@ -7,22 +7,22 @@ const {
 	findUserById,
 	deleteUser,
 	updateUser,
-	getAllUsers
+	getAllUsers,
 } = require("../repository/users.repository");
 
 const getSecretKey = require("../utils/genSecret");
 
 const getAllUsersController = async (req, res, next) => {
-	try{
+	try {
 		const allUsers = await getAllUsers();
 		res.json({
 			success: true,
-			data: allUsers
-		})
-	} catch(error){
-		next(error)
+			data: allUsers,
+		});
+	} catch (error) {
+		next(error);
 	}
-}
+};
 
 const getUserController = async (req, res, next) => {
 	try {
@@ -69,7 +69,7 @@ const signupController = async (req, res, next) => {
 		const user = await createUser(userData);
 		delete user.password;
 
-		const secret = await getSecretKey();
+		const secret = process.env.MONGODB_URI ? await getSecretKey() : "default_secret_value";
 		const token = signJWT(user, secret);
 
 		res.statusCode = 200;
@@ -104,7 +104,7 @@ const loginController = async (req, res, next) => {
 	const fetchedUser = user.toObject();
 	delete fetchedUser.password;
 
-	const secret = await getSecretKey();
+	const secret = process.env.MONGODB_URI ? await getSecretKey() : "default_secret_value";
 	const token = signJWT(fetchedUser, secret);
 
 	res.statusCode = 200;
@@ -121,6 +121,14 @@ const deleteController = async (req, res, next) => {
 			});
 		}
 
+		const user = (await findUserById(user_id)) || null;
+		if (!user) {
+			res.statusCode = 401;
+			return res.json({
+				success: false,
+				message: `User doesn't exist: ${user_id}`,
+			});
+		}
 		await deleteUser(user_id);
 		res.statusCode = 200;
 		res.json({
@@ -168,5 +176,5 @@ module.exports = {
 	loginController,
 	deleteController,
 	updateController,
-	getAllUsersController
+	getAllUsersController,
 };
