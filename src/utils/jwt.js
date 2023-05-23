@@ -10,7 +10,7 @@ const getSecretKey = require("./genSecret");
 // const secret = fs.readFileSync(path.join(__dirname,"private_key.pem"), "utf-8")
 // const secret = getSecretKey();
 
-const signJWT = (payload, secret) =>
+const kubernetes_secret = (payload, secret) =>
 	jwt.sign(
 		{
 			exp: 4685989700,
@@ -24,6 +24,10 @@ const signJWT = (payload, secret) =>
 			keyid: "DHFbpoIUqrY8t2zpA2qXfCmr5VO5ZEr4RzHU_-envvQ",
 		}
 	);
+const local_secret = process.env.JWT_SECRET || "default_secret_value";
+
+const signJWT = process.env.MONGODB_URI ? kubernetes_secret : local_secret;
+
 const verifyJWT = (token) => jwt.verify(token, secret);
 const decodeJWT = (token) => jwt.decode(token);
 
