@@ -11,7 +11,6 @@ const getMongoDBConnectionString = () => {
 	}`;
 
 	const serivceMongodbConnection = process.env.MONGODB_URI;
-	console.log("🚀 ~ file: utilities.js:14 ~ getMongoDBConnectionString ~ serivceMongodbConnection:", serivceMongodbConnection)
 	
 	return serivceMongodbConnection || connectionString;
 };

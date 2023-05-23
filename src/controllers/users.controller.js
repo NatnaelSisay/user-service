@@ -10,6 +10,8 @@ const {
 	getAllUsers
 } = require("../repository/users.repository");
 
+const getSecretKey = require("../utils/genSecret");
+
 const getAllUsersController = async (req, res, next) => {
 	try{
 		const allUsers = await getAllUsers();
@@ -65,9 +67,10 @@ const signupController = async (req, res, next) => {
 		userData.password = await hashPassword(userData.password);
 
 		const user = await createUser(userData);
-
 		delete user.password;
-		const token = signJWT(user);
+
+		const secret = await getSecretKey();
+		const token = signJWT(user, secret);
 
 		res.statusCode = 200;
 		res.json({ token });
@@ -100,7 +103,9 @@ const loginController = async (req, res, next) => {
 
 	const fetchedUser = user.toObject();
 	delete fetchedUser.password;
-	const token = signJWT(fetchedUser);
+
+	const secret = await getSecretKey();
+	const token = signJWT(fetchedUser, secret);
 
 	res.statusCode = 200;
 	res.json({ token });
