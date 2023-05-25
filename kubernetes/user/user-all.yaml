@@ -32,7 +32,7 @@ spec:
             secretName: jwt-private-key
       containers:
         - name: user
-          image: docker.io/javaethio/userimage:0.0.13
+          image: docker.io/javaethio/userimage:0.0.14
           volumeMounts:
             - name: private-key
               mountPath: /etc/jwt
