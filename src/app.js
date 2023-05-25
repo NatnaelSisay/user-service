@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 
-const userModel = require("./models/users.model");
+
 const usersRouter = require("./routes/users.router");
 const { getMongoDBConnectionString } = require("./utils/utilities");
 
